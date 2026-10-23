@@ -1,157 +1,124 @@
 # Student Performance Prediction using Machine Learning
 
-**IBM SkillsBuild Data Analytics with AI Academic Internship Program**  
-*Conducted by BharatCares in association with AICTE*  
-**Candidate Name:** Sameeksha  
-**Email:** sameekshauniyal05@gmail.com  
+**Project:** Student Performance Prediction  
+**Candidate:** Yashraj Gupta  
+**Program context:** AICTE | IBM SkillsBuild Data Analytics with AI Internship 2026 | BharatCares
 
----
+This repository contains a machine-learning project that predicts a student's final mathematics grade (`G3`, on a 0–20 scale) using student demographic, family, study-habit, and prior-grade features. The repository includes a Jupyter notebook, Python dependencies, a project report, and this README.
 
-## Submission Files
+> **Attribution note:** This repository is a copy/adaptation of an existing project. Please retain appropriate attribution to the original author and verify that reuse is permitted by the internship before submitting it as your own work.
 
-As per BharatCares submission requirements, the following four files are submitted:
+## Required submission files
 
-| # | File | Format | Description |
-|---|------|--------|-------------|
-| 1 | `Sameeksha_StudentPerformancePrediction.ipynb` | `.ipynb` (Jupyter Notebook) | Complete project code -- executed with all outputs |
-| 2 | `requirements.txt` | `.txt` | Python libraries/dependencies required to run the project |
-| 3 | `Sameeksha_StudentPerformancePrediction_ProjectReport.docx` | `.docx` (Microsoft Word) | Complete project documentation and report |
-| 4 | `README.md` | `.md` (Markdown) | Project overview, dataset link, technologies, setup instructions |
+| File | Format | Purpose |
+|---|---|---|
+| `YashrajGupta_StudentPerformancePrediction.ipynb` | Jupyter Notebook | Project code and analysis |
+| `requirements.txt` | Text | Python dependencies |
+| `YashrajGupta_StudentPerformancePrediction_ProjectReport.docx` | Word document | Project report |
+| `README.md` | Markdown | Project overview and instructions |
 
----
+## Project overview
 
-## Project Description
+The project uses a Random Forest regression model to estimate the final grade (`G3`) from features in the Student Performance dataset. It includes data analysis and visualizations, preprocessing, model training, and evaluation. The repository also contains a Flask backend and a React/Vite frontend.
 
-A full-stack Machine Learning web application that predicts a student's final academic grade (`G3`, scale 0-20) based on 32 input features including demographic background, study habits, family support, and historical exam scores.
-
-- **Backend:** Flask REST API  
-- **Frontend:** React (Vite)  
-- **ML Model:** Random Forest Regressor (scikit-learn)  
-- **Dataset:** [`data/student-mat.csv`](https://www.kaggle.com/datasets/uciml/student-alcohol-consumption) (395 samples)
-
----
+- **Language:** Python
+- **Data analysis:** pandas, NumPy
+- **Visualization:** Matplotlib, Seaborn
+- **Machine learning:** scikit-learn
+- **Model persistence:** Joblib
+- **Backend:** Flask
+- **Frontend:** React and Vite
+- **Notebook:** Jupyter
 
 ## Dataset
 
-- **Kaggle Dataset:** [Student Performance Data Set / Student Alcohol Consumption](https://www.kaggle.com/datasets/uciml/student-alcohol-consumption)  
-- **Alternate Reference:** [https://www.kaggle.com/datasets/whenamancodes/student-performance](https://www.kaggle.com/datasets/whenamancodes/student-performance)  
-- **Dimensions:** 395 rows x 33 columns  
-- **Target Variable:** `G3` -- Final continuous grade (0-20 scale)  
-- **Key Features:** `G1`, `G2` (exam scores), `studytime`, `failures`, `absences`, `Medu`, `Fedu`, `higher`
+The project references the UCI Student Performance dataset, commonly distributed through Kaggle:
 
----
+- [Kaggle — Student Alcohol Consumption / Student Performance](https://www.kaggle.com/datasets/uciml/student-alcohol-consumption)
+- [UCI Machine Learning Repository — Student Performance](https://archive.ics.uci.edu/dataset/320/student+performance)
 
-## Technologies Used
+The mathematics dataset (`student-mat.csv`) contains 395 records and 33 columns. The target is `G3`, the final grade on a 0–20 scale. Features include prior grades (`G1`, `G2`), study time, past failures, absences, and parental education. Check the dataset's terms and documentation before reuse.
 
-- **Python 3.12**
-- **Pandas**, **NumPy** -- Data manipulation
-- **Matplotlib**, **Seaborn** -- Visualization
-- **Scikit-learn** -- Model training and evaluation
-- **Joblib** -- Model serialization
-- **Flask** -- REST API backend
-- **React + Vite** -- Frontend UI
-- **Jupyter Notebook** -- Interactive ML pipeline
+## Model and evaluation
 
----
+The project describes a `RandomForestRegressor` with 100 trees and `random_state=42`, an 80/20 train-test split, and one-hot encoding using pandas. The existing project README reported the following evaluation metrics; treat them as reported results and rerun the notebook to independently verify them against the included code and data.
 
-## Machine Learning Model
+| Metric | Previously reported value |
+|---|---:|
+| R² | 0.8148 |
+| MAE | 1.1646 |
+| MSE | 3.7977 |
+| RMSE | 1.9488 |
 
-- **Algorithm:** `RandomForestRegressor` (`n_estimators=100`, `random_state=42`, `n_jobs=-1`)
-- **Encoding:** `pd.get_dummies(df, drop_first=True)` (One-Hot Encoding)
-- **Split:** 80% Train / 20% Test (`random_state=42`)
+## Project workflow
 
----
+1. Load the student performance dataset.
+2. Inspect and clean the data.
+3. Perform exploratory data analysis and create visualizations.
+4. Encode categorical variables and split the data into training and test sets.
+5. Train the Random Forest regression model.
+6. Evaluate predictions using R², MAE, MSE, and RMSE.
+7. Save the model for use by the Flask API and frontend.
 
-## Results
+## Setup and run
 
-| Metric | Value |
-|--------|-------|
-| **R2 Score** | **0.8148** (81.48% variance explained) |
-| **MAE** | **1.1646** points |
-| **MSE** | **3.7977** |
-| **RMSE** | **1.9488** |
+Run commands from the repository root.
 
----
+### 1. Create a virtual environment and install Python dependencies
 
-## Project Workflow
-
-```
-Dataset Acquisition (Kaggle/UCI)
-       |
-Data Cleaning and Missing Value Check
-       |
-Exploratory Data Analysis (EDA and Visualizations)
-       |
-Data Preprocessing (One-Hot Encoding)
-       |
-Train-Test Split (80/20, random_state=42)
-       |
-Model Training (RandomForestRegressor)
-       |
-Model Evaluation (MAE, MSE, RMSE, R2)
-       |
-Model Saved -> Flask API -> React Frontend
-```
-
----
-
-## How to Run
-
-### 1. Install Dependencies
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 2. Run Jupyter Notebook (ML Pipeline)
+### 2. Run the notebook
+
 ```bash
-jupyter notebook Sameeksha_StudentPerformancePrediction.ipynb
+jupyter notebook YashrajGupta_StudentPerformancePrediction.ipynb
 ```
 
-### 3. Start Flask Backend
+Open the notebook and run its cells in order. Confirm the dataset path used by the notebook matches the files in the `data/` directory.
+
+### 3. Run the Flask backend
+
 ```bash
 python backend/app.py
 ```
 
-### 4. Start React Frontend
+If this fails, check the backend's expected working directory, model-file path, and configuration before running it again.
+
+### 4. Run the frontend
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Open **http://127.0.0.1:3000** in your browser.
+Use the local URL printed by Vite in the terminal. The port may vary depending on the frontend configuration.
 
----
+## Repository layout
 
-## Project Structure
-
+```text
+.
+├── backend/       # Flask API and model-training code
+├── data/          # Dataset files (if included)
+├── figures/       # Exploratory analysis and evaluation plots
+├── frontend/      # React/Vite interface
+├── models/        # Saved model artifacts
+├── YashrajGupta_StudentPerformancePrediction.ipynb
+├── YashrajGupta_StudentPerformancePrediction_ProjectReport.docx
+├── requirements.txt
+└── README.md
 ```
-project_sameeksha/
-|
-|-- data/
-|   +-- student-mat.csv                                   # Dataset (395 records)
-|
-|-- figures/                                              # Generated EDA plots
-|   |-- fig1_target_distribution.png
-|   |-- fig2_correlation_heatmap.png
-|   |-- fig3_studytime_failures_vs_g3.png
-|   |-- fig4_actual_vs_predicted.png
-|   |-- fig5_feature_importance.png
-|   +-- fig6_residual_distribution.png
-|
-|-- backend/
-|   |-- app.py                                            # Flask REST API
-|   |-- train_model.py                                    # Model training script
-|   +-- model/student_performance_rf_model.joblib         # Saved model
-|
-|-- frontend/
-|   +-- src/App.jsx                                       # React UI
-|
-|-- models/
-|   +-- student_performance_rf_model.joblib               # Saved ML model
-|
-|-- Sameeksha_StudentPerformancePrediction.ipynb          # Jupyter Notebook (submission)
-|-- requirements.txt                                      # Dependencies (submission)
-|-- Sameeksha_StudentPerformancePrediction_ProjectReport.docx  # Report (submission)
-+-- README.md                                             # This file (submission)
-```
+
+Some files or subdirectories may differ from this overview; the repository contents are the source of truth.
+
+## Important before submission
+
+- Ensure the notebook, report, and README agree on the project title, dataset, methods, and results.
+- Confirm the notebook runs and its outputs are present.
+- Do not describe reported metrics as independently verified unless you rerun the notebook.
+- Preserve original authorship attribution and follow the internship's rules for reused or adapted work.
